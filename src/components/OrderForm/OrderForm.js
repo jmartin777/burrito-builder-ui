@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { newOrder } from "../../apiCalls";
 
 function OrderForm(props) {
   const [name, setName] = useState("");
@@ -22,6 +23,14 @@ function OrderForm(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    const newOrder = {
+      id: Date.now(),
+      name,
+      ingredients
+      
+    }
+    props.addOrder(newOrder) // Adds order to page State
+    props.createOrder(newOrder) // Posts order to API
     clearInputs();
   }
 

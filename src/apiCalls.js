@@ -11,3 +11,19 @@ export const getOrders = () => {
       throw error; 
     });
 };
+
+export const newOrder = (dataIn) => {
+  fetch('http://localhost:3001/api/v1/orders', {
+      method: 'POST',
+      body: JSON.stringify(dataIn),
+      headers: {"Content-Type": "application/json"}
+      
+      }).then(res => res.json())
+      .then(data => {
+          console.log(data);
+      })
+      .catch((error) => {
+        console.error("Error Posting New Orders:", error);
+        throw error; 
+      });
+};
