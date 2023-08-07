@@ -1,0 +1,38 @@
+{
+    "orders": [
+    {
+    "id": 1,
+    "name": "Droid 1",
+    "ingredients": [
+    "beans",
+    "lettuce",
+    "carnitas",
+    "queso fresco",
+    "jalapeno"
+    ]
+    },
+    {
+    "id": 2,
+    "name": "Droid 2",
+    "ingredients": [
+    "steak",
+    "pico de gallo",
+    "lettuce",
+    "carnitas",
+    "queso fresco",
+    "jalapeno"
+    ]
+    },
+    {
+    "id": 3,
+    "name": "Droid 3",
+    "ingredients": [
+    "sofritas",
+    "beans",
+    "sour cream",
+    "carnitas",
+    "queso fresco"
+    ]
+    }
+    ]
+    }
