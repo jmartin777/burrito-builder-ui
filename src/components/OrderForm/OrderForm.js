@@ -1,10 +1,12 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function OrderForm(props) {
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
-  function handleIngredientClick(ingredient) {
+  function handleIngredientClick(ingredient, e) {
+    e.preventDefault();
     if (!ingredients.includes(ingredient)) {
       setIngredients([...ingredients, ingredient]);
     }
@@ -14,6 +16,10 @@ function OrderForm(props) {
     setName(e.target.value);
   }
 
+  useEffect(() => {
+    setIsSubmitDisabled(!(name.trim()!== "" && ingredients.length > 0));
+  }, [name, ingredients]);
+
   function handleSubmit(e) {
     e.preventDefault();
     clearInputs();
@@ -22,6 +28,7 @@ function OrderForm(props) {
   function clearInputs() {
     setName("");
     setIngredients([]);
+    setIsSubmitDisabled(true);
   };
 
   const possibleIngredients = [
@@ -43,7 +50,7 @@ function OrderForm(props) {
       <button
         key={ingredient}
         name={ingredient}
-        onClick={() => handleIngredientClick(ingredient)}
+        onClick={(e) => handleIngredientClick(ingredient , e)}
       >
         {ingredient}
       </button>
@@ -65,7 +72,7 @@ function OrderForm(props) {
 
       <p>Order: {ingredients.join(", ") || "Nothing selected"}</p>
 
-      <button onClick={(e) => handleSubmit(e)}>Submit Order</button>
+      <button onClick={(e) => handleSubmit(e)} disabled={isSubmitDisabled}>Submit Order</button>
     </form>
   );
 }
