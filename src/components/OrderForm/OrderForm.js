@@ -4,6 +4,16 @@ function OrderForm(props) {
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
 
+  function handleIngredientClick(ingredient) {
+    if (!ingredients.includes(ingredient)) {
+      setIngredients([...ingredients, ingredient]);
+    }
+  }
+
+  function handleNameChange(e) {
+    setName(e.target.value);
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     clearInputs();
@@ -33,7 +43,7 @@ function OrderForm(props) {
       <button
         key={ingredient}
         name={ingredient}
-        // onClick={(e) => }
+        onClick={() => handleIngredientClick(ingredient)}
       >
         {ingredient}
       </button>
@@ -47,8 +57,9 @@ function OrderForm(props) {
         placeholder="Name"
         name="name"
         value={name}
-        // onChange={(e) => }
-      />
+        onChange={handleNameChange}
+        />
+      
 
       {ingredientButtons}
 
