@@ -32,6 +32,13 @@ describe("Checks Order form and the POSTS an order", () => {
       statusCode:201,
       fixture: "NewOrder.json",
     }).as("postOrder");
+  cy.intercept("GET", "http://localhost:3001/api/v1/orders", {
+    fixture: "OrdersOnPagePost.json",
+  }).as("getOrders");
+
+    
+    
+    
   cy.get('input').type("Test User");
   cy.get('input').should("have.value", "Test User");
   cy.get('[name="beans"]').click();
@@ -43,11 +50,12 @@ describe("Checks Order form and the POSTS an order", () => {
   
   cy.get(':nth-child(15)').click();
   cy.wait("@postOrder");
+  cy.wait("@getOrders"); 
   
   
   cy.get('.order').should("have.length", 4);
-  cy.get(':nth-child(4) > h3').should("have.text", "Test User");
-  cy.get(':nth-child(4) > .ingredient-list > :nth-child(1)').should("contain.text", "beans");
+  cy.get(':nth-child(4) > h3').should("have.text", "Test User x");
+  cy.get(':nth-child(4) > .ingredient-list > :nth-child(1)').should("contain.text", "beans x");
   cy.get(':nth-child(4) > .ingredient-list > :nth-child(2)').should("contain.text", "lettuce");
   cy.get(':nth-child(4) > .ingredient-list > :nth-child(3)').should("contain.text", "carnitas");
   cy.get(':nth-child(4) > .ingredient-list > :nth-child(4)').should("contain.text", "queso fresco");

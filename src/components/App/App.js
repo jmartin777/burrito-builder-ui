@@ -16,6 +16,14 @@ function App() {
       .catch((err) => console.error("Error fetching:", err));
   }, []);
 
+  useEffect(() => {
+    getOrders()
+      .then((fetchedOrders) => {
+        setOrders(fetchedOrders.orders);
+      })
+      .catch((err) => console.error("Error fetching:", err));
+  }, []);
+
   const addOrder = (order) => {
     setOrders([...orders, order]);
   }
@@ -23,7 +31,12 @@ function App() {
     newOrder(order)
     .then((success) =>{
       if(success){
-        addOrder(order)
+        getOrders()
+        .then((fetchedOrders)=>{
+          setOrders(fetchedOrders.orders)
+        }).catch ((err)=>console.log ("Error Fetching Orders", err))
+        
+        
     } else {
       alert('Your Burrito has not been ordered, please try again.')
     }
