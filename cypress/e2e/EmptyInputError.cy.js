@@ -31,5 +31,11 @@ describe("Checks Order form and the POSTS an order", () => {
     cy.get('input').type("Test User");
     cy.get(':nth-child(15)').should("be.disabled");
     cy.get(".order").should("have.length", 3);
+    cy.get('input').clear();
+    cy.get(':nth-child(15)').should("be.disabled");
+    cy.get(".input").should("have.length", 0);
+    cy.get('[name="beans"]').click();
+    cy.get(':nth-child(15)').should("be.disabled");
+    
   });
 });
