@@ -29,8 +29,7 @@ function OrderForm(props) {
       ingredients
       
     }
-    props.addOrder(newOrder) // Adds order to page State
-    props.createOrder(newOrder) // Posts order to API
+    props.createOrder(newOrder) 
     clearInputs();
   }
 

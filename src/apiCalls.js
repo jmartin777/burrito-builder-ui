@@ -13,17 +13,23 @@ export const getOrders = () => {
 };
 
 export const newOrder = (dataIn) => {
-  fetch('http://localhost:3001/api/v1/orders', {
-      method: 'POST',
-      body: JSON.stringify(dataIn),
-      headers: {"Content-Type": "application/json"}
-      
-      }).then(res => res.json())
-      .then(data => {
-          console.log(data);
-      })
-      .catch((error) => {
-        console.error("Error Posting New Orders:", error);
-        throw error; 
-      });
+  return fetch('http://localhost:3001/api/v1/orders', {
+    method: 'POST',
+    body: JSON.stringify(dataIn),
+    headers: { "Content-Type": "application/json" }
+  })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+      return res.json();
+    })
+    .then((data) => {
+      console.log(data);
+      return true;
+    })
+    .catch((error) => {
+      console.error("Error Posting New Orders:", error);
+      return false;
+    });
 };

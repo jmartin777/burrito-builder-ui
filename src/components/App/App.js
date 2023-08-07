@@ -20,14 +20,25 @@ function App() {
     setOrders([...orders, order]);
   }
   const createOrder = (order) => {
-    newOrder(order);
+    newOrder(order)
+    .then((success) =>{
+      if(success){
+        addOrder(order)
+    } else {
+      alert('Your Burrito has not been ordered, please try again.')
+    }
+   })
+   .catch((error) =>{
+    console.error("An error occured:", error);
+   });
+    
   }
 
   return (
     <main className="App">
       <header>
         <h1>Burrito Builder</h1>
-        <OrderForm createOrder={createOrder} addOrder={addOrder} />
+        <OrderForm createOrder={createOrder} />
       </header>
 
       <Orders orders={orders} />
